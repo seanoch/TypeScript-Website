@@ -29,8 +29,8 @@ export interface ATABootstrapConfig {
   fetcher?: typeof fetch
   /** If you need a custom logger instead of the console global */
   logger?: Logger
-  /** Wheather to use package.json as the source of truth for transitive dependencies' versions */
-  usePackageJson?: boolean
+  /** Whether to use package.json as the source of truth for transitive dependencies' versions */
+  resolveDependenciesFromPackageJson?: boolean
 }
 
 type PackageJsonDependencies = {
@@ -144,7 +144,7 @@ export const setupTypeAcquisition = (config: ATABootstrapConfig) => {
 
           // Recurse through deps
           let typesPackageJson
-          if (config.usePackageJson){
+          if (config.resolveDependenciesFromPackageJson){
             typesPackageJson = moduleMap.get(dts.moduleName)?.typesPackageJson
           }
           await resolveDeps(dtsCode, depth + 1, typesPackageJson)
