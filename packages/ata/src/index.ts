@@ -91,7 +91,7 @@ export const setupTypeAcquisition = (config: ATABootstrapConfig) => {
     const mightBeOnDT = treesOnly.filter(t => !hasDTS.includes(t))
     const dtTrees = await Promise.all(
       // TODO: Switch from 'latest' to the version from the original tree which is user-controlled
-      mightBeOnDT.map(f => getFileTreeForModuleWithTag(config, `@types/${getDTName(f.moduleName)}`, f.version))
+      mightBeOnDT.map(f => getFileTreeForModuleWithTag(config, `@types/${getDTName(f.moduleName)}`, "latest"))
     )
 
     const dtTreesOnly = dtTrees.filter(t => !("error" in t)) as NPMTreeMeta[]
